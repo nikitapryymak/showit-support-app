@@ -40,8 +40,8 @@
             <a href=<%= event.url %>  target="_blank">
             <div class="item">
                 <p class="name"><%= event.name %></p>
-                <span class="time"><%= new Date(event.start).toLocaleTimeString() %> -- </span>
-                <span class="time"><%= new Date(event.end).toLocaleTimeString() %> </span>
+                <span class="time"><%= new Date(event.start).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }) %> -- </span>
+                <span class="time"><%= new Date(event.end).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }) %> </span>
             </div>
         </a>
         <% }) %> 
