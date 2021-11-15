@@ -16,6 +16,7 @@ module.exports.getDashboard = async (req, res) => {
         calendarId: process.env.CALENDAR_ID,
         timeMin,
         timeMax,
+        timeZone: 'America/Phoenix'
       });
 
       let events = calRes.data.items.map(event => ({
