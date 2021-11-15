@@ -15,16 +15,25 @@ module.exports.postToChannel = async (req, res) => {
 				text: `:calendar:  SCHEDULE ${getDay()} :calendar:`
 			}
 		}
-  ]
-  events.forEach(item => {
-    const startTime = formatTime(new Date(item.start).toLocaleTimeString());
-    const endTime = formatTime(new Date(item.end).toLocaleTimeString());
-    blocks.push({
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `*${item.name}* \n ${startTime} -- ${endTime}`
-    }});
+  ];
+  events.forEach(({ name, start, end }) => {
+    if (start && end) {
+      const startTime = formatTime(new Date(start).toLocaleTimeString());
+      const endTime = formatTime(new Date(end).toLocaleTimeString());
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*${name}* \n ${startTime} -- ${endTime}`
+      }});
+    } else {
+      blocks.push({
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*${name}* :no_entry: \n -- OUT --`
+      }});
+    }
   });
 
     try {
