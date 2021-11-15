@@ -18,8 +18,8 @@ module.exports.postToChannel = async (req, res) => {
   ];
   events.forEach(({ name, start, end }) => {
     if (start && end) {
-      const startTime = formatTime(new Date(start).toLocaleTimeString());
-      const endTime = formatTime(new Date(end).toLocaleTimeString());
+      const startTime = formatTime(new Date(start).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }));
+      const endTime = formatTime(new Date(end).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }));
       blocks.push({
         type: 'section',
         text: {
