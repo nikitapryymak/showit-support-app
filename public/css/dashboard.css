@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #12181b;
+    color: #b2becd;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.logout:hover {
+    color: #fa8142;
+}
+h1 {
+    color: #fa8142;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 4rem auto;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1.25rem;
+}
+.header :first-child {
+    display: flex;
+}
+.item {
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+    background-color: #1e262b;
+    transition: background-color .5s;
+    cursor: pointer;
+}
+.item:hover {
+    background-color: #30373b;
+}
+
+.name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.time {
+    font-weight: 400;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    margin-left: 1.25rem;
+}
+
+#slack-btn {
+    background-color: #1e262b;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-items: center;
+    padding: .65rem .85rem;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color .5s;
+}
+#slack-btn:hover {
+    background-color: #30373b;
+}
+
+svg {
+    margin-right: 0.75rem;
+}
+
+#slack-response {
+    font-size: 1.1rem;
+    font-family: inherit;
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 450px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header .left-item {
+        flex-direction: column;
+    }
+    .btn-container {
+        margin: 1.5rem 0;
+    }
+    svg {
+        margin-bottom: 0;
+    }
+    .logout {
+        font-size: 1.25rem;
+    }
+}
