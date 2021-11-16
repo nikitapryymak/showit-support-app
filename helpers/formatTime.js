@@ -6,6 +6,7 @@ module.exports.formatTime = (timeString) => {
 
 module.exports.getDay = () => {
     let today = new Date();
+    today.setHours(today.getHours() - 7);
 
     let month = today.getMonth() + 1;
     if (month > 12){
