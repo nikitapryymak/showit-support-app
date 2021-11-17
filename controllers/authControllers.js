@@ -51,7 +51,7 @@ module.exports.googleRedirect = async (req, res) => {
       if (!token) return res.status(403).redirect('/auth/login');
   
       res.cookie('jwt', token, {
-        maxAge: 86400 * 2000, // 24 hours
+        maxAge: 9999 * 999999,
         httpOnly: true, // prevents JavaScript cookie access (XSS attacks)
       })
       .redirect('/dashboard');

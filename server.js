@@ -25,10 +25,6 @@ app.use('/slack', slackRoutes);
 
 app.use('/dashboard', dashboardRoutes);
 
-app.get('*', (req, res) => {
-  res.redirect('dashboard');
-});
-
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT} in ${process.env.NODE_ENV} environment`);
 });
