@@ -44,7 +44,7 @@
                         <span class="time"><%= new Date(event.start).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }) %> -- </span>
                         <span class="time"><%= new Date(event.end).toLocaleTimeString('en-US', { timeZone:'America/Phoenix' }) %> </span>
                     <% } else { %>
-                        <p>-- OUT ⛔️ --</p>
+                        <p class="time"><%= getDescription(event.name) %></p>
                     <% } %> 
                 </div>
             </a>

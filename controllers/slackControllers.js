@@ -1,5 +1,6 @@
 const { WebClient } = require('@slack/web-api');
 const { formatTime, getDay } = require('../helpers/formatTime');
+const { getDescription, hasRole } = require('../helpers/roles');
 
 const slack = new WebClient(process.env.BOT_TOKEN);
 
@@ -31,7 +32,7 @@ module.exports.postToChannel = async (req, res) => {
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*${name}* :no_entry: \n -- OUT --`
+          text: `*${name.split(' ')[0]} ${name.split(' ')[1]}* ${!hasRole(name) ? ':no_entry:' : ''} \n ${getDescription(name)}`
       }});
     }
   });

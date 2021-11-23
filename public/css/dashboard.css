@@ -78,6 +78,7 @@ h1 {
     font-size: 1.1rem;
     cursor: pointer;
     transition: background-color .5s;
+    outline: none;
 }
 #slack-btn:hover {
     background-color: #30373b;

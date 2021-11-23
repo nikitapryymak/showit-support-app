@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 const oAuth2Client = require('../config/oAuth2Client');
+const { getDescription, hasRole } = require('../helpers/roles');
 
 module.exports.getDashboard = async (req, res) => {
 
@@ -19,16 +20,22 @@ module.exports.getDashboard = async (req, res) => {
         timeZone: 'America/Phoenix'
       });
 
-      let events = calRes.data.items.map(event => ({
+      let eventData = calRes.data.items.map(event => ({
         name: event.summary,
         start: event.start.dateTime,
         end: event.end.dateTime,
         url: event.htmlLink
       }));
 
-      events = events.sort((a, b) => { return new Date(a.start) - new Date(b.start) });
-
-      res.render('dashboard', { events, error: null });
+      let workingToday = eventData.filter(e => e.start && e.end).sort((a, b) => { return new Date(a.start) - new Date(b.start) });
+      let backupRoles = eventData.filter(e => !e.start && !e.end && hasRole(e.name));
+      let outToday = eventData.filter(e => !e.start && !e.end && !hasRole(e.name));
+      let events = [
+        ...workingToday, 
+        ...backupRoles,
+        ...outToday
+      ];
+      res.render('dashboard', { events, error: null, getDescription });
     } catch (err) {
       res.render('dashboard', { error: err.message, events: null });
     }
