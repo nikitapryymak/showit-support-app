@@ -11,7 +11,9 @@ module.exports.isAuth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (err) {
-        if (err.message === 'jwt expired') return res.redirect('/auth/logout');
-        res.status(400).json({ error: err });
+        res.cookie('jwt', '', {
+            maxAge: 0, // deletes cookie
+        })
+        .render('login', { error: err.message });
     }
 }

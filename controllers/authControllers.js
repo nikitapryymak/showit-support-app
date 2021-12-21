@@ -4,7 +4,7 @@ const oAuth2Client = require('../config/oAuth2Client');
 const User = require('../models/User');
 
 module.exports.getLogin = async (req, res) => {
-    res.sendFile(path.join(__dirname, '../public', 'login.html'));
+    res.render('login', {error: null});
 }
 
 module.exports.getLogout = async (req, res) => {
@@ -47,7 +47,7 @@ module.exports.googleRedirect = async (req, res) => {
         user = await newUser.save();
       }
           
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {expiresIn:"1d"});
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "30d" });
       if (!token) return res.status(403).redirect('/auth/login');
   
       res.cookie('jwt', token, {

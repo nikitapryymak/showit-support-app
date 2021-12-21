@@ -23,14 +23,20 @@
             Login with Google
         </button>
         <div id="loading-spinner" class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
+        <% if (error) { %> 
+            <p class="login-error">Error: <%= error %> </p>
+        <% } %> 
     </form>
     
     <script type="text/javascript">
         const loadingSpinner = document.getElementById('loading-spinner');
         const button = document.querySelector('button');
+        const errorMsg = document.querySelector('.login-error');
         function handleClick(e) {
             button.style.display = 'none';
             loadingSpinner.style.display = 'inline-block';
+            errorMsg.style.display = 'none'
         }
     </script>
 </body>
