@@ -1,6 +1,7 @@
 const { google } = require('googleapis');
 const oAuth2Client = require('../config/oAuth2Client');
-const { getDescription, hasRole } = require('../helpers/roles');
+const filterPeopleWhoAreOut = require('../helpers/filter');
+const { getDescription, hasRole, isOut } = require('../helpers/roles');
 
 module.exports.getDashboard = async (req, res) => {
 
@@ -22,16 +23,16 @@ module.exports.getDashboard = async (req, res) => {
 
       let eventData = calRes.data.items.map(event => ({
         name: event.summary,
-        start: event.start.dateTime,
-        end: event.end.dateTime,
+        start: isOut(event.summary) ? null : event.start.dateTime,
+        end: isOut(event.summary) ? null : event.end.dateTime,
         url: event.htmlLink
       }));
 
-      let workingToday = eventData.filter(e => e.start && e.end).sort((a, b) => { return new Date(a.start) - new Date(b.start) });
+      let workingToday = filterPeopleWhoAreOut(eventData).sort((a, b) => { return new Date(a.start).getHours() - new Date(b.start).getHours() });
       let backupRoles = eventData.filter(e => !e.start && !e.end && hasRole(e.name));
-      let outToday = eventData.filter(e => !e.start && !e.end && !hasRole(e.name));
+      let outToday = eventData.filter(e => isOut(e.name));
       let events = [
-        ...workingToday, 
+          ...workingToday,
         ...backupRoles,
         ...outToday
       ];

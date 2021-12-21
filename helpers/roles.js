@@ -5,13 +5,19 @@ module.exports.getDescription = (event = '') => {
         return '-- Backup :b: --';
     } else if (event.includes('(T2)')) {
         return '-- T2 :two: --';
-    } else {
+    } else if (event.includes('(OUT)')) {
         return '-- OUT --';
     }
 }
 
 module.exports.hasRole = (event = '') => {
     if (event.includes('(E)') || event.includes('(B)') || event.includes('(T2)')) {
+        return true;
+    } else return false;
+}
+
+module.exports.isOut = (event = '') => {
+    if (event.includes('(OUT)')) {
         return true;
     } else return false;
 }
